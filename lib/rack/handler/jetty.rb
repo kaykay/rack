@@ -33,7 +33,8 @@ module Rack
         env['SERVER_PORT'] = request.getServerPort()
         env['QUERY_STRING'] = request.getQueryString()
         env.update Rack::Utils.parse_query(request.getQueryString())
-        env['SCRIPT_NAME'] = env['PATH_INFO'] = request.getPathInfo()
+        #env['SCRIPT_NAME'] = env['PATH_INFO'] = request.getPathInfo()
+        env['PATH_INFO'] = request.getPathInfo()
         #Find out if body is available for the request. Need to find a better way of doing this.
         if env['Transfer-Encoding'] =~ /chunked/i
           input_stream = request.getInputStream()

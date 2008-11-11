@@ -1,7 +1,6 @@
 require 'java'
 %w{jetty-6.1.3 jetty-util-6.1.3 servlet-api-2.5-6.1.3}.each { |l|require File.dirname(__FILE__) + '/../../../ext/' + l+ '.jar' }
 require 'stringio'
-require 'ruby-debug'
 import org.mortbay.jetty
 import org.mortbay.jetty.handler
 

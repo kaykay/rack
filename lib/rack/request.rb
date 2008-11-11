@@ -107,7 +107,8 @@ module Rack
     def POST
       if @env["rack.request.form_input"].eql? @env["rack.input"]
         @env["rack.request.form_hash"]
-      elsif form_data?
+        
+      elsif form_data? and not @env['Transfer-Encoding'] =~ /chunked/i
         @env["rack.request.form_input"] = @env["rack.input"]
         unless @env["rack.request.form_hash"] =
             Utils::Multipart.parse_multipart(env)
@@ -203,14 +204,6 @@ module Rack
         else
           raise "Invalid value for Accept-Encoding: #{part.inspect}"
         end
-      end
-    end
-
-    def ip
-      if addr = @env['HTTP_X_FORWARDED_FOR']
-        addr.split(',').last.strip
-      else
-        @env['REMOTE_ADDR']
       end
     end
   end

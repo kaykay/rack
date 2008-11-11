@@ -68,7 +68,11 @@ module Rack
         base_request = request
         base_request.setHandled(true);
         response.setStatus(status);
-        response.setContentType(headers['Content-Type']);
+        headers.each do |k, vs|
+          vs.each do |v|
+            response.addHeader(k, v)
+          end
+        end
         response.getWriter().print(resp.body) unless status.to_s =~ /^4/ # need send right text when return error statuses.
 
       end

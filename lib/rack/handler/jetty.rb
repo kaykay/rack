@@ -70,7 +70,7 @@ module Rack
         response.setStatus(status);
         headers.each do |k, vs|
           vs.each do |v|
-            response.addHeader(k, v)
+            response.addHeader(k, v) unless k == "Content-Length"
           end
         end
         response.getWriter().print(resp.body) unless status.to_s =~ /^4/ # need send right text when return error statuses.

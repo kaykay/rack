@@ -31,7 +31,8 @@ def git_tree_version
 end
 
 def gem_version
-  git_tree_version.gsub(/-.*/, '')
+  '0.4.1'
+  #git_tree_version.gsub(/-.*/, '')
 end
 
 def release
@@ -70,7 +71,7 @@ end
 
 desc "Generate RDox"
 task "RDOX" do
-  sh "specrb -Ilib:test -a --rdox >RDOX"
+#  sh "specrb -Ilib:test -a --rdox >RDOX"
 end
 
 desc "Generate Rack Specification"
@@ -121,13 +122,13 @@ middleware) into a single method call.
 Also see http://rack.rubyforge.org.
     EOF
 
-    s.files           = manifest + %w(SPEC RDOX)
+    s.files           = manifest 
     s.bindir          = 'bin'
     s.executables     << 'rackup'
     s.require_path    = 'lib'
     s.has_rdoc        = true
     s.extra_rdoc_files = ['README', 'SPEC', 'RDOX', 'KNOWN-ISSUES']
-    s.test_files      = Dir['test/{test,spec}_*.rb']
+#    s.test_files      = Dir['test/{test,spec}_*.rb']
 
     s.author          = 'Christian Neukirchen'
     s.email           = 'chneukirchen@gmail.com'
